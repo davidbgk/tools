@@ -268,10 +268,6 @@ export interface Correctness {
 	 */
 	noConstructorReturn?: RuleConfiguration;
 	/**
-	 * Prevents object literals having more than one property declaration for the same name. If an object property with the same name is defined multiple times (except when combining a getter with a setter), only the last definition makes it into the object and previous definitions are ignored, which is likely a mistake.
-	 */
-	noDuplicateObjectKeys?: RuleConfiguration;
-	/**
 	 * Disallows empty destructuring patterns.
 	 */
 	noEmptyPattern?: RuleConfiguration;
@@ -287,6 +283,10 @@ export interface Correctness {
 	 * Prevent the usage of the return value of React.render.
 	 */
 	noRenderReturnValue?: RuleConfiguration;
+	/**
+	 * Disallow returning a value from a setter
+	 */
+	noSetterReturn?: RuleConfiguration;
 	/**
 	 * Disallow comparison of expressions modifying the string case with non-compliant value.
 	 */
@@ -323,10 +323,6 @@ export interface Correctness {
 	 * It enables the recommended rules for this group
 	 */
 	recommended?: boolean;
-	/**
-	 * Require that each enum member value be explicitly initialized.
-	 */
-	useEnumInitializers?: RuleConfiguration;
 	/**
 	 * Enforce "for" loop update clause moving the counter in the right direction.
 	 */
@@ -552,6 +548,10 @@ export interface Style {
 	 */
 	noNegationElse?: RuleConfiguration;
 	/**
+	 * Disallow non-null assertions using the ! postfix operator.
+	 */
+	noNonNullAssertion?: RuleConfiguration;
+	/**
 	 * Disallow the use of constants which its value is the upper-case version of its name.
 	 */
 	noShoutyConstants?: RuleConfiguration;
@@ -579,6 +579,10 @@ export interface Style {
 	 * Enforce default function parameters and optional parameters to be last.
 	 */
 	useDefaultParameterLast?: RuleConfiguration;
+	/**
+	 * Require that each enum member value be explicitly initialized.
+	 */
+	useEnumInitializers?: RuleConfiguration;
 	/**
 	 * Disallow the use of Math.pow in favor of the ** operator.
 	 */
@@ -653,6 +657,10 @@ export interface Suspicious {
 	 */
 	noDoubleEquals?: RuleConfiguration;
 	/**
+	 * Prevents object literals having more than one property declaration for the same name. If an object property with the same name is defined multiple times (except when combining a getter with a setter), only the last definition makes it into the object and previous definitions are ignored, which is likely a mistake.
+	 */
+	noDuplicateObjectKeys?: RuleConfiguration;
+	/**
 	 * Disallow duplicate function arguments name.
 	 */
 	noDuplicateParameters?: RuleConfiguration;
@@ -681,17 +689,9 @@ export interface Suspicious {
 	 */
 	noLabelVar?: RuleConfiguration;
 	/**
-	 * Disallow non-null assertions using the ! postfix operator.
-	 */
-	noNonNullAssertion?: RuleConfiguration;
-	/**
 	 * Prevents from having redundant "use strict".
 	 */
 	noRedundantUseStrict?: RuleConfiguration;
-	/**
-	 * Disallow returning a value from a setter
-	 */
-	noSetterReturn?: RuleConfiguration;
 	/**
 	 * Disallow identifiers from shadowing restricted names.
 	 */
@@ -826,12 +826,11 @@ export type Category =
 	| "lint/correctness/noVoidElementsWithChildren"
 	| "lint/correctness/useValidForDirection"
 	| "lint/correctness/noUnsafeFinally"
-	| "lint/correctness/noDuplicateObjectKeys"
 	| "lint/correctness/noConstructorReturn"
-	| "lint/correctness/useEnumInitializers"
 	| "lint/correctness/noPrecisionLoss"
 	| "lint/correctness/noVoidTypeReturn"
 	| "lint/correctness/noStringCaseMismatch"
+	| "lint/correctness/noSetterReturn"
 	| "lint/nursery/noAssignInExpressions"
 	| "lint/nursery/noWith"
 	| "lint/nursery/noExtraSemicolons"
@@ -897,6 +896,8 @@ export type Category =
 	| "lint/style/useDefaultParameterLast"
 	| "lint/style/useConst"
 	| "lint/style/noVar"
+	| "lint/style/noNonNullAssertion"
+	| "lint/style/useEnumInitializers"
 	| "lint/suspicious/noArrayIndexKey"
 	| "lint/suspicious/noAsyncPromiseExecutor"
 	| "lint/suspicious/noCatchAssign"
@@ -916,10 +917,9 @@ export type Category =
 	| "lint/suspicious/noEmptyInterface"
 	| "lint/suspicious/noExtraNonNullAssertion"
 	| "lint/suspicious/noRedundantUseStrict"
-	| "lint/suspicious/noNonNullAssertion"
 	| "lint/suspicious/noConstEnum"
-	| "lint/suspicious/noSetterReturn"
 	| "lint/suspicious/useDefaultSwitchClauseLast"
+	| "lint/suspicious/noDuplicateObjectKeys"
 	| "files/missingHandler"
 	| "format"
 	| "internalError/io"
